@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>xyz.j1support.music.slack.status</string>
+        <key>EnvironmentVariables</key>
+        <dict>
+            <key>SLACK_SECRET_TOKEN</key>
+            <string>xoxp-REPLACE-ME</string>
+        </dict>
+        <key>Program</key>
+        <string>/usr/local/bin/apple_music_slack_status_updates</string>
+        <key>RunAtLoad</key>
+        <true/>
+    </dict>
+</plist>

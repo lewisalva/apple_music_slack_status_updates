@@ -1,0 +1,30 @@
+{
+  "name": "apple_music_slack_status_updates",
+  "author": {
+    "name": "Lewis Alva",
+    "email": "lewis@j1.support"
+  },
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "bun": "^1.1.9"
+  },
+  "scripts": {
+    "start": "bun index.ts",
+    "build": "bun build ./index.ts --compile --outfile build/apple_music_slack_status_updates",
+    "install:copy-executable": "cp ./build/apple_music_slack_status_updates /usr/local/bin/",
+    "install:copy-startup-plist": "cp ./xyz.j1support.music.slack.status.plist /Library/LaunchAgents/",
+    "install:load-startup-plist": "launchctl load /Library/LaunchAgents/xyz.j1support.music.slack.status.plist",
+    "install": "bun run build && bun run install:copy-executable && bun run install:copy-startup-plist && bun run install:load-startup-plist",
+    "uninstall:unload": "launchctl unload /Library/LaunchAgents/xyz.j1support.music.slack.status.plist",
+    "uninstall:remove-startup-plist": "rm /Library/LaunchAgents/xyz.j1support.music.slack.status.plist",
+    "uninstall:remove-executable": "rm /usr/local/bin/apple_music_slack_status_updates",
+    "uninstall": "bun run uninstall:unload && bun run uninstall:remove-startup-plist && bun run uninstall:remove-executable"
+  }
+}
