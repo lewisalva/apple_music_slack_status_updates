@@ -25,8 +25,7 @@ const nearestRoundedUpMinute = (timestamp: number) => {
 }
 
 const calculateExpiration = (duration: number) => {
-  return nearestRoundedUpMinute((Date.now() / 1000) + duration);
-
+  return nearestRoundedUpMinute((Date.now() / 1000)) + nearestRoundedUpMinute(duration);
 }
 
 let previousSongArtist = '';
