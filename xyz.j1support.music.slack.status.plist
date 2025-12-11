@@ -10,7 +10,7 @@
             <string>xoxp-REPLACE-ME</string>
         </dict>
         <key>Program</key>
-        <string>/usr/local/bin/apple_music_slack_status_updates</string>
+        <string>~/Library/Application Support/xyz.j1support.music.slack.status/apple_music_slack_status_updates</string>
         <key>RunAtLoad</key>
         <true/>
     </dict>

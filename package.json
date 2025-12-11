@@ -7,24 +7,26 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "^1.3.4"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "bun": "^1.1.9"
+    "bun": "^1.3.4"
   },
   "scripts": {
     "start": "bun index.ts",
     "build": "bun build ./index.ts --compile --outfile build/apple_music_slack_status_updates",
-    "install:copy-executable": "cp ./build/apple_music_slack_status_updates /usr/local/bin/",
-    "install:copy-startup-plist": "cp ./xyz.j1support.music.slack.status.plist /Library/LaunchAgents/",
-    "install:load-startup-plist": "launchctl load /Library/LaunchAgents/xyz.j1support.music.slack.status.plist",
-    "install": "bun run build && bun run install:copy-executable && bun run install:copy-startup-plist && bun run install:load-startup-plist",
-    "uninstall:unload": "launchctl unload /Library/LaunchAgents/xyz.j1support.music.slack.status.plist",
-    "uninstall:remove-startup-plist": "rm /Library/LaunchAgents/xyz.j1support.music.slack.status.plist",
-    "uninstall:remove-executable": "rm /usr/local/bin/apple_music_slack_status_updates",
-    "uninstall": "bun run uninstall:unload && bun run uninstall:remove-startup-plist && bun run uninstall:remove-executable"
+    "ensure-app-support-dir": "mkdir -p \"$HOME/Library/Application Support/xyz.j1support.music.slack.status\"",
+    "copy-executable": "bun run ensure-app-support-dir && cp ./build/apple_music_slack_status_updates \"$HOME/Library/Application Support/xyz.j1support.music.slack.status/\"",
+    "copy-startup-plist": "sed \"s|~|$HOME|g\" ./xyz.j1support.music.slack.status.plist > ~/Library/LaunchAgents/xyz.j1support.music.slack.status.plist",
+    "load-startup-plist": "launchctl load ~/Library/LaunchAgents/xyz.j1support.music.slack.status.plist",
+    "install-app": "bun run build && bun run copy-executable && bun run copy-startup-plist && bun run load-startup-plist",
+    "unload": "launchctl unload ~/Library/LaunchAgents/xyz.j1support.music.slack.status.plist",
+    "remove-startup-plist": "rm ~/Library/LaunchAgents/xyz.j1support.music.slack.status.plist",
+    "remove-executable": "rm \"$HOME/Library/Application Support/xyz.j1support.music.slack.status/apple_music_slack_status_updates\"",
+    "remove-app-support-dir": "rmdir \"$HOME/Library/Application Support/xyz.j1support.music.slack.status\" 2>/dev/null || true",
+    "uninstall-app": "bun run unload && bun run remove-startup-plist && bun run remove-executable && bun run remove-app-support-dir"
   }
 }

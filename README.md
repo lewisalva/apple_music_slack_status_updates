@@ -8,7 +8,7 @@ I tried to run https://github.com/sbdchd/apple-music-to-slack but I'm guessing s
 ## Setup
 
 1. Clone the repo
-2. Install [Bun](https://bun.sh)
+2. Install [Bun](https://bun.sh) (or use `npm i` and `npx bun...` commands)
 3. Create a [new Slack app](https://api.slack.com/apps?new_app=1)
 4. Visit the OAuth & Permissions page and add the following User scopes:
     - `users.profile:read`
@@ -23,16 +23,14 @@ I tried to run https://github.com/sbdchd/apple-music-to-slack but I'm guessing s
 
 1. Run the following command to install the script:
     ```bash
-    sudo bun run install
+    bun run install-app
     ```
 
-This command will build the script, copy the executable to `/usr/local/bin/apple_music_slack_status_updates`, copy the startup plist to `/Library/LaunchAgents/xyz.j1support.music.slack.status.plist`, and load the startup plist.
-
-When installed, you will see a new item by [Jarred Sumner](https://x.com/jarredsumner?lang=en), the creator of Bun, in the "Startup Items" section of your System Preferences.
+This command will build the script, copy the executable to `~/Library/Application Support/xyz.j1support.music.slack.status/apple_music_slack_status_updates`, copy the startup plist to `~/Library/LaunchAgents/xyz.j1support.music.slack.status.plist`, and load the startup plist.
 
 ## Uninstall
 
 1. Run the following command to uninstall the script:
     ```bash
-    sudo bun run uninstall
+    bun run uninstall-app
     ```

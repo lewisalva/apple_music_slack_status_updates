@@ -39,18 +39,14 @@ const main = async () => {
     
     if (previousSongArtist !== currentSongArtist) {
       previousSongArtist = currentSongArtist;
-
       const myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${SLACK_SECRET_TOKEN}`);
-      myHeaders.append("Content-Type", "application/json");
-    
-      const requestOptions = {
+      myHeaders.append("Content-Type", "application/json")
+      fetch("https://slack.com/api/users.profile.set", {
         method: "POST",
         headers: myHeaders,
         body: JSON.stringify({ profile: { status_text: currentSongArtist, status_emoji: randomEmoji(), status_expiration: calculateExpiration(currentTrack.duration)} })
-      };
-    
-      fetch("https://slack.com/api/users.profile.set", requestOptions)
+      })
         .catch((error) => console.error(error));
     }
   };
